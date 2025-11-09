@@ -1,10 +1,15 @@
-
 import React from 'react';
 
-const MessageCard: React.FC = () => {
+interface MessageCardProps {
+  themeColor?: 'pink' | 'red';
+}
+
+const MessageCard: React.FC<MessageCardProps> = ({ themeColor = 'pink' }) => {
+  const headingColor = themeColor === 'pink' ? 'text-pink-700' : 'text-red-700';
+
   return (
-    <section className="text-center bg-white/60 p-6 rounded-2xl shadow-inner">
-      <h2 className="text-3xl font-bold text-pink-700 mb-4 font-nunito">
+    <section className="text-center bg-white/60 p-6 rounded-2xl shadow-inner h-full flex flex-col justify-center">
+      <h2 className={`text-3xl font-bold ${headingColor} mb-4 font-nunito`}>
         A little note for you... 💖
       </h2>
       <p className="text-gray-700 text-lg leading-relaxed">

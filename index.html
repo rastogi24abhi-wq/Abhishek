@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
+      body.shinchan-bg { background-color: #fef3c7; } /* amber-100 */
+
       @keyframes fall {
         0% { transform: translateY(-10vh) rotateZ(0deg); opacity: 1; }
         100% { transform: translateY(110vh) rotateZ(720deg); opacity: 0; }
@@ -39,6 +41,194 @@
         animation-iteration-count: infinite;
         opacity: 0;
       }
+
+      /* Balloon Styles */
+      @keyframes floatUp {
+        0% { transform: translateY(10vh) translateX(0vw) rotate(0deg); }
+        25% { transform: translateY(-20vh) translateX(2vw) rotate(5deg); }
+        50% { transform: translateY(-55vh) translateX(-2vw) rotate(-5deg); }
+        75% { transform: translateY(-90vh) translateX(2vw) rotate(5deg); }
+        100% { transform: translateY(-120vh) translateX(0vw) rotate(0deg); }
+      }
+      @keyframes pop {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+      .balloon {
+        position: absolute;
+        bottom: -20vh;
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        box-shadow: inset -10px -10px 0 rgba(0,0,0,0.07);
+        animation-name: floatUp;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        pointer-events: auto;
+        cursor: pointer;
+        transition: transform 0.1s ease-out;
+        will-change: transform;
+      }
+      .balloon:hover {
+        transform: scale(1.1);
+      }
+      .balloon::after {
+        content: '';
+        position: absolute;
+        bottom: -7px;
+        left: 50%;
+        transform: translateX(-50%) rotate(10deg);
+        width: 1px;
+        height: 25px;
+        background: rgba(0,0,0,0.2);
+      }
+      .balloon::before {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        background: inherit;
+        border-radius: 50%;
+        transform: translateX(-50%);
+        filter: brightness(0.8);
+      }
+      .balloon.popped {
+        animation: pop 0.3s ease-out forwards;
+        pointer-events: none;
+      }
+
+      /* Cake Styles */
+      @keyframes cake-appear {
+        0% { transform: translateY(50px) scale(0.8); opacity: 0; }
+        100% { transform: translateY(0) scale(1); opacity: 1; }
+      }
+      .cake-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -2rem; /* Pull up into the footer space */
+        animation: cake-appear 1s 2s ease-out forwards;
+        opacity: 0;
+        transform-origin: bottom;
+      }
+      .cake {
+        position: relative;
+        width: 120px;
+        height: 100px;
+      }
+      .cake .base {
+        width: 100%;
+        height: 50px;
+        background: #fbcfe8; /* light pink */
+        position: absolute;
+        bottom: 0;
+        border-radius: 8px;
+        border: 3px solid #db2777; /* medium pink */
+      }
+      .cake .frosting {
+        width: 100%;
+        height: 25px;
+        background: #fdf2f8; /* very light pink */
+        position: absolute;
+        bottom: 40px; /* Overlap with base */
+        border-radius: 50% / 15px;
+        border: 3px solid #db2777;
+        border-bottom: none;
+      }
+      .cake .frosting::before {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #f472b6; /* pink */
+        border-radius: 50%;
+        top: 8px;
+        left: 20px;
+        box-shadow: 25px 0 #f472b6, 50px 0 #f472b6, 75px 0 #f472b6;
+      }
+      .cake .candle {
+        width: 8px;
+        height: 35px;
+        background: repeating-linear-gradient(
+          45deg,
+          #fef08a,
+          #fef08a 5px,
+          #fde047 5px,
+          #fde047 10px
+        );
+        position: absolute;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 2px solid #eab308;
+        border-radius: 2px;
+      }
+      @keyframes flicker {
+        0%, 100% { transform: scaleY(1) scaleX(1); background-color: #f5b041; box-shadow: 0 0 10px #f5b041, 0 0 20px #f5b041; opacity: 1; }
+        50% { transform: scaleY(0.95) scaleX(1.05); background-color: #f8c471; box-shadow: 0 0 15px #f8c471, 0 0 30px #f8c471; opacity: 0.9; }
+      }
+      .cake .flame {
+        width: 10px;
+        height: 15px;
+        background-color: #f5b041;
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        animation: flicker 1.5s ease-in-out infinite;
+        transform-origin: bottom;
+      }
+
+      /* Page Switcher */
+      .page-switcher {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 100;
+        display: flex;
+        gap: 0.5rem;
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 0.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .page-switcher button {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 9999px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        color: #555;
+        background-color: transparent;
+      }
+      .page-switcher button.active {
+        color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .page-switcher button.active.diya {
+        background-color: #ec4899; /* pink-500 */
+      }
+      .page-switcher button.active.shinchan {
+        background-color: #ef4444; /* red-500 */
+      }
+
+      /* Shinchan Animation */
+      @keyframes bob {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+      }
+      .animate-bob {
+        animation: bob 3s ease-in-out infinite;
+      }
+
     </style>
   <script type="importmap">
 {
@@ -50,7 +240,7 @@
 }
 </script>
 </head>
-  <body class="bg-pink-100 font-nunito">
+  <body class="font-nunito">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
