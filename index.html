@@ -220,6 +220,20 @@
         background-color: #ef4444; /* red-500 */
       }
 
+      @media (max-width: 640px) { /* sm breakpoint */
+        .page-switcher {
+          top: 1rem;
+          left: 50%;
+          transform: translateX(-50%);
+          right: auto;
+          width: calc(100% - 2rem);
+          justify-content: center;
+        }
+        .page-switcher button {
+          flex-grow: 1;
+        }
+      }
+
       /* Shinchan Animation */
       @keyframes bob {
         0%, 100% { transform: translateY(0); }

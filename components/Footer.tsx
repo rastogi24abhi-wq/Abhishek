@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
     <footer className="w-full text-center p-4 mt-8">
       <BirthdayCake />
       <p className="text-pink-600/80 mt-4">
-        Made with lots of love &lt;3
+      © 2025 Abhishek
       </p>
     </footer>
   );

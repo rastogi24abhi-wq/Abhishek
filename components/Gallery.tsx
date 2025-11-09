@@ -14,7 +14,7 @@ const Gallery: React.FC = () => {
   return (
     <section className="text-center">
       <h2 className="text-3xl font-bold text-pink-700 mb-6 font-nunito">
-        Our Awesome Memories! ✨
+        Happy 18th 🍾! ✨
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {images.map((src, index) => (
